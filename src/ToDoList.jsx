@@ -4,18 +4,29 @@ import { updateTodo, deleteTodo } from "./features/todo/todoSlice";
 function ToDoList() {
   const todo = useSelector((state) => state.todo.myTodo);
   const dispatch = useDispatch();
+
   return (
-    <ul className="flex">
-      <li className="mr-2">{todo}</li>
-      <button
-        className="border rounded-md bg-gray-500 text-amber-50 p-1 font-extralight hover:bg-black/80 cursor-pointer"
-        onClick={() => {
-          dispatch(deleteTodo(""));
-        }}
-      >
-        delete
-      </button>
-    </ul>
+    <div className="h-full overflow-y-auto">
+      {todo.map((item) => {
+        return (
+          <ul key={item.todoId}>
+            <li className="mb-2">
+              {item.text}
+              <br />
+              {item.todoDate}
+              <br />
+              <button
+                onClick={() => {dispatch(deleteTodo(item.todoId))}}
+                className=" bg-red-600  rounded-md mb-1 p-1"
+              >
+                delete
+              </button>
+              <hr />
+            </li>
+          </ul>
+        );
+      })}
+    </div>
   );
 }
 export default ToDoList;

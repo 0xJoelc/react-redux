@@ -7,10 +7,14 @@ export const todoSlice = createSlice({
   },
   reducers: {
     updateTodo: (state, action) => {
-      state.myTodo = action.payload;
+      state.myTodo = [...state.myTodo, action.payload];
+      console.log(state.myTodo)
     },
-    deleteTodo: (state, action) => {
-      state.myTodo = action.payload;
+    deleteTodo: (state,action) => {
+   const updatesTodo = state.myTodo.filter(
+    (item)=>{item.todoId !== action.payload}
+   )
+   state.myTodo = updatesTodo
     },
   },
 });

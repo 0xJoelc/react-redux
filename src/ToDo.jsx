@@ -10,12 +10,20 @@ function ToDo() {
     todoDate: "",
   });
 
-  const main = useSelector((state) => state.todo.myTodo);
-  //   console.log(main);
+
+
   const dispatch = useDispatch();
 
-  const handleTodoId = () => {
-    return dispatch(updateTodo(main.push()));
+  const handleAddTodo = () => {
+    todo.todoId = Date.now();
+    todo.todoDate = new Date().toDateString();
+
+    dispatch(updateTodo(todo));
+    setTodo({
+      text: "",
+      todoId: "",
+      todoDate: "",
+    });
   };
   return (
     <>
@@ -29,22 +37,17 @@ function ToDo() {
           </div>
           <div className="">
             <input
+            value={todo.text}
               className="w-full h-10 mb-3 p-2"
               type="text"
               placeholder="write ToDo"
               onChange={(e) => {
-                dispatch(updateTodo(e.target.value));
+                setTodo({ ...todo, text: e.target.value });
               }}
             />
-            <input
-              className="w-full h-10 mb-3 "
-              type="datetime-local"
-              onChange={(e) => {
-                setTodo({ ...todo, todoDate: e.target.value });
-              }}
-            />
+    
             <button
-              onClick={handleTodoId}
+              onClick={handleAddTodo}
               className="bg-green-500 w-full rounded-md mb-4"
             >
               add
