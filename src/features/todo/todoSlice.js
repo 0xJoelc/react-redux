@@ -12,7 +12,7 @@ export const todoSlice = createSlice({
     },
     deleteTodo: (state,action) => {
    const updatesTodo = state.myTodo.filter(
-    (item)=>{item.todoId !== action.payload}
+    (item)=>item.todoId !== action.payload
    )
    state.myTodo = updatesTodo
     },
